@@ -15,7 +15,7 @@ const TopRated = () => {
       .then((store) => setData(store.results));
   }, []);
 
-  console.log(Data);
+  // console.log(Data);
   return (
     <>
       <div id="home">

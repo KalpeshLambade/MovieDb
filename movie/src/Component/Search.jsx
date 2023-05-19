@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
-import "./CSS/style.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Api_key = "c45a857c193f6302f2b5061c3b85e743";
-const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${Api_key}&language=en-US&page=1`;
+const Api_key = `c45a857c193f6302f2b5061c3b85e743`;
 
-const HomePage = () => {
+const Search = () => {
   const route = useNavigate();
-  const [Data, setData] = useState();
+  const [search, setSearch] = useState();
+
+  const movie = useParams();
+  const search_url = `https://api.themoviedb.org/3/search/movie?api_key=${Api_key}&language=en-US&query=${movie.name}&page=1`;
 
   useEffect(() => {
-    fetch(API_URL)
+    fetch(search_url)
       .then((res) => res.json())
-      .then((store) => setData(store.results));
-  }, []);
+      .then((data) => setSearch(data.results));
+  }, [search_url]);
 
-  // console.log(Data);
+  console.log(search);
+
   return (
     <>
       <div id="home">
         <div>
-          {Data &&
-            Data.map((e, i) => (
-              <div onClick={()=> route(`/single/${e.id}`)} key={i}>
+          {search &&
+            search.map((e, i) => (
+              <div onClick={() => route(`/single/${e.id}`)} key={i}>
                 <div className="movie_img">
                   <img
                     src={`https://image.tmdb.org/t/p/w500${e.backdrop_path}`}
@@ -42,4 +44,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Search;

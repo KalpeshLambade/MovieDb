@@ -5,6 +5,7 @@ import Navbar from "./Component/Global/Navbar";
 import TopRated from "./Component/TopRated";
 import Upcomming from "./Component/Upcomming";
 import SinglePage from "./Component/SinglePage";
+import Search from "./Component/Search";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/top" element={<TopRated />}></Route>
         <Route exact path="/upcome" element={<Upcomming />}></Route>
         <Route exact path="/single/:id" element={<SinglePage />} />
+        <Route exact path="/search/:name" element={<Search />} />
       </Routes>
     </>
   );

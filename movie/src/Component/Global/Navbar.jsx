@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "../CSS/style.css";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const route = useNavigate();
+
+  const [data, setData] = useState({ movie: "" });
+
+  const getData = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setData({ ...data, [name]: value });
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    setData({ movie: "" });
+    route(`/search/${data.movie}`);
+  };
+
+  console.log(data);
 
   return (
     <>
@@ -27,8 +44,22 @@ const Navbar = () => {
               Upcoming
             </div>
             <div className="searchBar display">
-              <input type="text" placeholder="Movie Name" />
-              <button>Search</button>
+              <input
+                type="text"
+                placeholder="Movie Name"
+                name="movie"
+                onChange={(e) => {
+                  getData(e);
+                }}
+                value={data.movie}
+              />
+              <button
+                onClick={(e) => {
+                  submit(e);
+                }}
+              >
+                Search
+              </button>
             </div>
           </div>
         </div>

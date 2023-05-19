@@ -22,7 +22,7 @@ const SinglePage = () => {
   }, [movie_details, cast_details]);
 
   //   console.log(data);
-  console.log(actors);
+  // console.log(actors);
   return (
     <>
       <div id="overview">
